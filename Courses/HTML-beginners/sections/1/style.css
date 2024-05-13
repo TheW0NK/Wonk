@@ -6,3 +6,8 @@ html{
     color: white;
     text-align: center;
 }
+
+button{
+    border: 10px solid;
+    border-radius: 10px;
+}
