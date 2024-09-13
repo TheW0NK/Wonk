@@ -1,18 +1,18 @@
 // List of allowed IP addresses
 const allowedIPs = ['123.456.789.0', '987.654.321.0']; // Replace with actual IP addresses
 
-// Function to encrypt content (simple base64 encoding for demonstration)
-function encryptContent(content) {
-    return btoa(content);
+// Function to encode Unicode to base64
+function encodeUnicode(str) {
+    return btoa(unescape(encodeURIComponent(str)));
 }
 
-// Function to decrypt content
-function decryptContent(content) {
-    return atob(content);
+// Function to decode base64 to Unicode
+function decodeUnicode(str) {
+    return decodeURIComponent(escape(atob(str)));
 }
 
 // Encrypted content
-const encryptedContent = encryptContent(`
+const encryptedContent = encodeUnicode(`
   <h1 style="text-align: center; font-family: sans-serif; font-size: 500%">Portal</h1>
   <p>__________________________________</p>
   <p>Interstellar Status:</p><p style="color: red;">Banned</p>
@@ -136,7 +136,7 @@ function getUserIP(callback) {
         .then(response => response.json())
         .then(data => callback(data.ip))
         .catch(error => {
-            console.error('Error fetching IP address!:', error);
+            console.error('Error fetching IP address:', error);
             alert('Unable to verify IP address. Access denied.');
         });
 }
@@ -145,7 +145,7 @@ function getUserIP(callback) {
 getUserIP(function(ip) {
     if (allowedIPs.includes(ip)) {
         // Decrypt and display content if IP address is allowed
-        document.getElementById('content').innerHTML = decryptContent(encryptedContent);
+        document.getElementById('content').innerHTML = decodeUnicode(encryptedContent);
         document.getElementById('content').style.display = 'block';
     } else {
         alert('Error 403: Forbidden.');
