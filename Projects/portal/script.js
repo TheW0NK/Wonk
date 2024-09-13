@@ -1,5 +1,5 @@
 // Define the correct password
-const correctPassword = '44WeK3$%';
+const correctPassword = 'yourPassword';
 
 // Function to encrypt content (simple base64 encoding for demonstration)
 function encryptContent(content) {
@@ -130,14 +130,13 @@ const encryptedContent = encryptContent(`
   <p>___________________________________________________________________________</p>
 `);
 
-
 // Prompt user for password
-const userPassword = prompt('Error 403: You are forbidden to veiw this page. Enter password to use:');
+const userPassword = prompt('This page has restricted access. Enter password:');
 
 if (userPassword === correctPassword) {
     // Decrypt and display content if password is correct
     document.getElementById('content').innerHTML = decryptContent(encryptedContent);
     document.getElementById('content').style.display = 'block';
 } else {
-    alert('Access denied.');
+    alert('Incorrect password. Access denied.');
 }
