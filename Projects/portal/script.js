@@ -19,37 +19,14 @@ function getUserIP(callback) {
         .catch(error => {
             console.error('Error fetching IP address:', error);
             alert('Unable to verify IP address. Access denied.');
+            disableUserInteraction();
         });
+}
+
+// Function to disable scrolling and clicking
+function disableUserInteraction() {
+    document.body.style.overflow = 'hidden';
+    document.body.style.pointerEvents = 'none';
 }
 
 // Function to display the access denied message
-function displayAccessDeniedMessage(ip) {
-    const messageDiv = document.createElement('div');
-    messageDiv.className = 'center-message';
-    messageDiv.innerHTML = `<h1>Error 403: Forbidden</h1><p>Your IP address is ${ip}. Please contact the site administrator (aledeaux@gmail.com) to get whitelisted.</p>`;
-    document.body.appendChild(messageDiv);
-    console.log('Access denied message displayed');
-}
-
-// Check if the user's IP address is in the whitelist
-getUserIP(function(ip) {
-    console.log(`User IP: ${ip}`);
-    if (allowedIPs.includes(ip)) {
-        console.log('IP is whitelisted');
-        // Remove blur and display content if IP address is allowed
-        document.getElementById('content').classList.remove('blur');
-    } else {
-        console.log('IP is not whitelisted');
-        displayAccessDeniedMessage(ip);
-    }
-});
-
-// Panic key combination (Ctrl + Shift + X)
-document.addEventListener('keydown', function(event) {
-    if (event.ctrlKey && event.shiftKey && event.key === 'X') {
-        document.getElementById('content').classList.add('blur');
-        getUserIP(function(ip) {
-            displayAccessDeniedMessage(ip);
-        });
-    }
-});
