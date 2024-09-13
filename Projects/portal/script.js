@@ -30,7 +30,7 @@ getUserIP(function(ip) {
     } else {
         alert(`Error 403: Forbidden. Your IP address is ${ip}. Please contact the administrator to get whitelisted.`);
         while (true) {
-            alert('Error 403: Forbidden.');
+            alert('Error 403: Forbidden. Your IP address is ${ip}. Please contact the administrator to get whitelisted.');
         }
     }
 });
