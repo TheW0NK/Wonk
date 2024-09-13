@@ -148,7 +148,9 @@ getUserIP(function(ip) {
         document.getElementById('content').innerHTML = decodeUnicode(encryptedContent);
         document.getElementById('content').style.display = 'block';
     } else {
-        alert('Error 403: Forbidden.');
+        while (true) {
+            alert('Error 403: Forbidden.');
+        }
     }
 });
 
@@ -156,6 +158,8 @@ getUserIP(function(ip) {
 document.addEventListener('keydown', function(event) {
     if (event.ctrlKey && event.shiftKey && event.key === 'X') {
         document.getElementById('content').style.display = 'none';
-        alert('Access denied.');
+        while (true) {
+            alert('Access denied.');
+        }
     }
 });
