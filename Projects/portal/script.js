@@ -1,5 +1,5 @@
 // List of allowed IP addresses
-const allowedIPs = ['104.225.188.213', '136.228.205.185']; // Replace with actual IP addresses
+const allowedIPs = ['104.225.188.213', '136.228.205.245']; // Replace with actual IP addresses
 
 // Function to encode Unicode to base64
 function encodeUnicode(str) {
@@ -19,7 +19,14 @@ function getUserIP(callback) {
         .catch(error => {
             console.error('Error fetching IP address:', error);
             alert('Unable to verify IP address. Access denied.');
+            disableUserInteraction();
         });
+}
+
+// Function to disable scrolling and clicking
+function disableUserInteraction() {
+    document.body.style.overflow = 'hidden';
+    document.body.style.pointerEvents = 'none';
 }
 
 // Function to display the access denied message
@@ -29,6 +36,24 @@ function displayAccessDeniedMessage(ip) {
     messageDiv.innerHTML = `<h1>Error 403: Forbidden</h1><p>Your IP address is ${ip}. Please contact the site administrator (aledeaux@gmail.com) to get whitelisted.</p>`;
     document.body.appendChild(messageDiv);
     console.log('Access denied message displayed');
+    disableInspectTool();
+}
+
+// Function to disable the inspect tool
+function disableInspectTool() {
+    // Disable right-click context menu
+    document.addEventListener('contextmenu', function(event) {
+        event.preventDefault();
+    });
+
+    // Disable F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'F12' || 
+            (event.ctrlKey && event.shiftKey && (event.key === 'I' || event.key === 'J')) || 
+            (event.ctrlKey && event.key === 'U')) {
+            event.preventDefault();
+        }
+    });
 }
 
 // Check if the user's IP address is in the whitelist
@@ -48,8 +73,5 @@ getUserIP(function(ip) {
 document.addEventListener('keydown', function(event) {
     if (event.ctrlKey && event.shiftKey && event.key === 'X') {
         document.getElementById('content').classList.add('blur');
-        getUserIP(function(ip) {
-            displayAccessDeniedMessage(ip);
-        });
     }
 });
