@@ -1,5 +1,5 @@
 // List of allowed IP addresses
-const allowedIPs = ['123.456.789.0', '987.654.321.0']; // Replace with actual IP addresses
+const allowedIPs = ['10.104.102.138', '987.654.321.0']; // Replace with actual IP addresses
 
 // Function to encode Unicode to base64
 function encodeUnicode(str) {
