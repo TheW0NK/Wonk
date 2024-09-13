@@ -35,11 +35,11 @@ function displayAccessDeniedMessage(ip) {
 getUserIP(function(ip) {
     console.log(`User IP: ${ip}`);
     if (allowedIPs.includes(ip)) {
-        console.log('IP is whitelisted');
+        console.log('IP is whitelisted, allowing access...');
         // Remove blur and display content if IP address is allowed
         document.getElementById('content').classList.remove('blur');
     } else {
-        console.log('IP is not whitelisted');
+        console.log('IP is not whitelisted! Retaining div element...');
         displayAccessDeniedMessage(ip);
     }
 });
