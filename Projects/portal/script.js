@@ -22,6 +22,14 @@ function getUserIP(callback) {
         });
 }
 
+// Function to display the access denied message
+function displayAccessDeniedMessage(ip) {
+    const messageDiv = document.createElement('div');
+    messageDiv.className = 'center-message';
+    messageDiv.innerHTML = `<h1>Error 403: Forbidden</h1><p>Your IP address is ${ip}. Please contact the site administrator (aledeaux@gmail.com) to get whitelisted.</p>`;
+    document.body.appendChild(messageDiv);
+}
+
 // Check if the user's IP address is in the whitelist
 getUserIP(function(ip) {
     console.log(`User IP: ${ip}`);
@@ -31,10 +39,7 @@ getUserIP(function(ip) {
         document.getElementById('content').classList.remove('blur');
     } else {
         console.log('IP is not whitelisted');
-        alert(`Error 403: Forbidden. Your IP address is ${ip}. Please contact the site administrator (aledeaux@gmail.com) to get whitelisted.`);
-        while (true) {
-            alert(`Error 403: Forbidden. Your IP address is ${ip}. Please contact the site administrator (aledeaux@gmail.com) to get whitelisted.`);
-        }
+        displayAccessDeniedMessage(ip);
     }
 });
 
@@ -43,9 +48,7 @@ document.addEventListener('keydown', function(event) {
     if (event.ctrlKey && event.shiftKey && event.key === 'X') {
         document.getElementById('content').classList.add('blur');
         getUserIP(function(ip) {
-            while (true) {
-                alert(`Access denied. Your IP address is ${ip}. Please contact the site administrator (aledeaux@gmail.com) to get whitelisted.`);
-            }
+            displayAccessDeniedMessage(ip);
         });
     }
 });
