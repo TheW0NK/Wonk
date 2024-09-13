@@ -1,5 +1,5 @@
 // List of allowed IP addresses
-const allowedIPs = ['10.104.102.138', '136.228.205.245']; // Replace with actual IP addresses
+const allowedIPs = ['104.225.188.213', '136.228.205.245']; // Replace with actual IP addresses
 
 // Function to encode Unicode to base64
 function encodeUnicode(str) {
@@ -24,10 +24,13 @@ function getUserIP(callback) {
 
 // Check if the user's IP address is in the whitelist
 getUserIP(function(ip) {
+    console.log(`User IP: ${ip}`);
     if (allowedIPs.includes(ip)) {
+        console.log('IP is whitelisted');
         // Remove blur and display content if IP address is allowed
         document.getElementById('content').classList.remove('blur');
     } else {
+        console.log('IP is not whitelisted');
         alert(`Error 403: Forbidden. Your IP address is ${ip}. Please contact the site administrator (aledeaux@gmail.com) to get whitelisted.`);
         while (true) {
             alert(`Error 403: Forbidden. Your IP address is ${ip}. Please contact the site administrator (aledeaux@gmail.com) to get whitelisted.`);
