@@ -1,5 +1,5 @@
 // List of allowed IP addresses
-const allowedIPs = ['10.104.102.138', '987.654.321.0']; // Replace with actual IP addresses
+const allowedIPs = ['123.456.789.0', '987.654.321.0']; // Replace with actual IP addresses
 
 // Function to encrypt content (simple base64 encoding for demonstration)
 function encryptContent(content) {
@@ -136,7 +136,7 @@ function getUserIP(callback) {
         .then(response => response.json())
         .then(data => callback(data.ip))
         .catch(error => {
-            console.error('Error fetching IP address:', error);
+            console.error('Error fetching IP address!:', error);
             alert('Unable to verify IP address. Access denied.');
         });
 }
@@ -149,5 +149,13 @@ getUserIP(function(ip) {
         document.getElementById('content').style.display = 'block';
     } else {
         alert('Error 403: Forbidden.');
+    }
+});
+
+// Panic key combination (Ctrl + Shift + X)
+document.addEventListener('keydown', function(event) {
+    if (event.ctrlKey && event.shiftKey && event.key === 'X') {
+        document.getElementById('content').style.display = 'none';
+        alert('Access denied.');
     }
 });
