@@ -1,5 +1,5 @@
-// Define the correct password
-const correctPassword = 'yourPassword';
+// List of allowed IP addresses
+const allowedIPs = ['10.104.102.138', '987.654.321.0']; // Replace with actual IP addresses
 
 // Function to encrypt content (simple base64 encoding for demonstration)
 function encryptContent(content) {
@@ -130,13 +130,24 @@ const encryptedContent = encryptContent(`
   <p>___________________________________________________________________________</p>
 `);
 
-// Prompt user for password
-const userPassword = prompt('This page has restricted access. Enter password:');
-
-if (userPassword === correctPassword) {
-    // Decrypt and display content if password is correct
-    document.getElementById('content').innerHTML = decryptContent(encryptedContent);
-    document.getElementById('content').style.display = 'block';
-} else {
-    alert('Incorrect password. Access denied.');
+// Function to get the user's IP address
+function getUserIP(callback) {
+    fetch('https://api.ipify.org?format=json')
+        .then(response => response.json())
+        .then(data => callback(data.ip))
+        .catch(error => {
+            console.error('Error fetching IP address:', error);
+            alert('Unable to verify IP address. Access denied.');
+        });
 }
+
+// Check if the user's IP address is in the whitelist
+getUserIP(function(ip) {
+    if (allowedIPs.includes(ip)) {
+        // Decrypt and display content if IP address is allowed
+        document.getElementById('content').innerHTML = decryptContent(encryptedContent);
+        document.getElementById('content').style.display = 'block';
+    } else {
+        alert('Error 403: Forbidden.');
+    }
+});
