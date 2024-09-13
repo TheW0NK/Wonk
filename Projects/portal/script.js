@@ -1,5 +1,5 @@
 // List of allowed IP addresses
-const allowedIPs = ['104.225.188.213', '136.228.205.245']; // Replace with actual IP addresses
+const allowedIPs = ['10.104.102.138', '136.228.205.245']; // Replace with actual IP addresses
 
 // Function to encode Unicode to base64
 function encodeUnicode(str) {
@@ -30,7 +30,7 @@ getUserIP(function(ip) {
     } else {
         alert(`Error 403: Forbidden. Your IP address is ${ip}. Please contact the site administrator (aledeaux@gmail.com) to get whitelisted.`);
         while (true) {
-            alert('Error 403: Forbidden. Your IP address is ${ip}. Please contact the site administrator (aledeaux@gmail.com) to get whitelisted.');
+            alert(`Error 403: Forbidden. Your IP address is ${ip}. Please contact the site administrator (aledeaux@gmail.com) to get whitelisted.`);
         }
     }
 });
@@ -39,8 +39,10 @@ getUserIP(function(ip) {
 document.addEventListener('keydown', function(event) {
     if (event.ctrlKey && event.shiftKey && event.key === 'X') {
         document.getElementById('content').classList.add('blur');
-        while (true) {
-            alert('Access denied.');
-        }
+        getUserIP(function(ip) {
+            while (true) {
+                alert(`Access denied. Your IP address is ${ip}. Please contact the site administrator (aledeaux@gmail.com) to get whitelisted.`);
+            }
+        });
     }
 });
