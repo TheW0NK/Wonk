@@ -19,14 +19,5 @@ function getUserIP(callback) {
         .catch(error => {
             console.error('Error fetching IP address:', error);
             alert('Unable to verify IP address. Access denied.');
-            disableUserInteraction();
         });
 }
-
-// Function to disable scrolling and clicking
-function disableUserInteraction() {
-    document.body.style.overflow = 'hidden';
-    document.body.style.pointerEvents = 'none';
-}
-
-// Function to display the access denied message
