@@ -1,5 +1,5 @@
 document.body.style.pointerEvents = 'none';
-}
+
 
 // Function to display the access denied message
 function displayAccessDeniedMessage(ip) {
