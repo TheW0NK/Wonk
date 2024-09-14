@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Wonk</title>
+  <link rel="icon" href="wonklogo.png" type="wonklogo.png">
+  <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+  <h1 style="text-align: center;">Wonk Projects</h1>
+  <a href="https://wonk.app/Portfolio/">
+    <button>Portfolio</button>
+  </a>
+  <a href="https://wonk.app/index">
+    <button>See Index</button>
+  </a>
+  <a>
+    <button>Forums</button>
+  </a>
+  <a>
+    <button>Submit an idea</button>
+  </a>
+
+  <h2>Forums</h2>
+  <iframe src="https://github.com/orgs/Wonk-studios/discussions" width="100%" height="600px"></iframe>
+
+  <h2>Submit Your Idea</h2>
+  <form id="ideaForm">
+    <label for="idea">Your Idea:</label>
+    <input type="text" id="idea" name="idea" required>
+    <button type="submit">Submit</button>
+  </form>
+  <h2>Submitted Ideas</h2>
+  <ul id="ideaList"></ul>
+
+  <script>
+    document.getElementById('ideaForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      const idea = document.getElementById('idea').value;
+      const ideaList = document.getElementById('ideaList');
+      const listItem = document.createElement('li');
+      listItem.textContent = idea;
+      ideaList.appendChild(listItem);
+      document.getElementById('ideaForm').reset();
+    });
+  </script>
+</body>
+
+</html>
