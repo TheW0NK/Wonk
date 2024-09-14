@@ -18,14 +18,22 @@
     <button>See Index</button>
   </a>
   <a>
-    <button>Forums</button>
+    <button id="forumButton">Forums</button>
   </a>
   <a>
     <button>Submit an idea</button>
   </a>
 
-  <h2>Forums</h2>
-  <iframe src="https://github.com/orgs/Wonk-studios/discussions" width="100%" height="600px"></iframe>
+  <div id="forumSection" style="display:none;">
+    <h2>Forums</h2>
+    <form id="forumForm">
+      <label for="message">Your Message:</label>
+      <input type="text" id="message" name="message" required>
+      <button type="submit">Post</button>
+    </form>
+    <h2>Messages</h2>
+    <ul id="messageList"></ul>
+  </div>
 
   <h2>Submit Your Idea</h2>
   <form id="ideaForm">
@@ -37,6 +45,21 @@
   <ul id="ideaList"></ul>
 
   <script>
+    document.getElementById('forumButton').addEventListener('click', function() {
+      const forumSection = document.getElementById('forumSection');
+      forumSection.style.display = forumSection.style.display === 'none' ? 'block' : 'none';
+    });
+
+    document.getElementById('forumForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      const message = document.getElementById('message').value;
+      const messageList = document.getElementById('messageList');
+      const listItem = document.createElement('li');
+      listItem.textContent = message;
+      messageList.appendChild(listItem);
+      document.getElementById('forumForm').reset();
+    });
+
     document.getElementById('ideaForm').addEventListener('submit', function(event) {
       event.preventDefault();
       const idea = document.getElementById('idea').value;
