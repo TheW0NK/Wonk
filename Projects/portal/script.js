@@ -1,6 +1,3 @@
-document.body.style.pointerEvents = 'none';
-
-
 // Function to display the access denied message
 function displayAccessDeniedMessage(ip) {
     const messageDiv = document.createElement('div');
@@ -46,3 +43,38 @@ function disableUserInteraction() {
         event.preventDefault();
     }, true);
 }
+
+// List of allowed IP addresses
+const allowedIPs = ['104.225.188.213', '136.228.205.245']; // Replace with actual IP addresses
+
+// Function to get the user's IP address
+function getUserIP(callback) {
+    fetch('https://api.ipify.org?format=json')
+        .then(response => response.json())
+        .then(data => callback(data.ip))
+        .catch(error => {
+            console.error('Error fetching IP address:', error);
+            alert('Unable to verify IP address. Access denied.');
+            disableUserInteraction();
+        });
+}
+
+// Check if the user's IP address is in the whitelist
+getUserIP(function(ip) {
+    console.log(`User IP: ${ip}`);
+    if (allowedIPs.includes(ip)) {
+        console.log('IP is whitelisted, allowing access...');
+        // Remove blur and display content if IP address is allowed
+        document.getElementById('content').classList.remove('blur');
+    } else {
+        console.log('IP is not whitelisted! Retaining div element...');
+        displayAccessDeniedMessage(ip);
+    }
+});
+
+// Panic key combination (Ctrl + Shift + X)
+document.addEventListener('keydown', function(event) {
+    if (event.ctrlKey && event.shiftKey && event.key === 'X') {
+        document.getElementById('content').classList.add('blur');
+    }
+});
