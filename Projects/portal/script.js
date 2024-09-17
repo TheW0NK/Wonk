@@ -8,7 +8,7 @@ function displayAccessDeniedMessage(ip) {
     disableInspectTool();
     disableUserInteraction();
 }
-
+//PEEN
 // Function to disable the inspect tool
 function disableInspectTool() {
     // Disable right-click context menu
