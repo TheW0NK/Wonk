@@ -1,40 +1,80 @@
-// List of allowed MAC addresses
-const allowedMACs = ['00:1A:2B:3C:4D:5E', '00:1A:2B:3C:4D:5F', '00:1A:2B:3C:4D:60']; // Replace with actual MAC addresses
+// Function to display the access denied message
+function displayAccessDeniedMessage(ip) {
+    const messageDiv = document.createElement('div');
+    messageDiv.className = 'center-message';
+    messageDiv.innerHTML = `<h1>Error 403: Forbidden</h1><p>Your IP address is ${ip}. Please contact the site administrator (aledeaux@gmail.com) to get whitelisted.</p>`;
+    document.body.appendChild(messageDiv);
+    console.log('Access denied message displayed');
+    disableInspectTool();
+    disableUserInteraction();
+}
+//PEEN
+// Function to disable the inspect tool
+function disableInspectTool() {
+    // Disable right-click context menu
+    document.addEventListener('contextmenu', function(event) {
+        event.preventDefault();
+    });
 
-// Function to get the user's MAC address
-function getUserMAC(callback) {
-    // Placeholder for actual MAC address retrieval logic
-    // This typically requires server-side support or a local application
-    fetch('/get-mac-address') // Example endpoint
+    // Disable F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'F12' || 
+            (event.ctrlKey && event.shiftKey && (event.key === 'I' || event.key === 'J')) || 
+            (event.ctrlKey && event.key === 'U')) {
+            event.preventDefault();
+        }
+    });
+}
+
+// Function to disable user interaction (clicking and scrolling)
+function disableUserInteraction() {
+    // Disable scrolling
+    document.body.style.overflow = 'hidden';
+
+    // Disable clicking
+    document.body.style.pointerEvents = 'none';
+
+    // Prevent default actions for mouse and touch events
+    document.addEventListener('mousedown', function(event) {
+        event.preventDefault();
+    }, true);
+
+    document.addEventListener('touchstart', function(event) {
+        event.preventDefault();
+    }, true);
+}
+
+// List of allowed IP addresses
+const allowedIPs = ['136.228.205.195', '104.225.188.243', '136.228.205.245', '136.228.205.215', '104.225.188.228', '136.228.206.79']; // Replace with actual IP addresses
+
+// Function to get the user's IP address
+function getUserIP(callback) {
+    fetch('https://api.ipify.org?format=json')
         .then(response => response.json())
-        .then(data => callback(data.mac))
+        .then(data => callback(data.ip))
         .catch(error => {
-            console.error('Error fetching MAC address:', error);
-            displayErrorMessage('Unable to verify MAC address. Access denied.');
+            console.error('Error fetching IP address:', error);
+            alert('Unable to verify IP address. Access denied.');
             disableUserInteraction();
         });
 }
 
-// Function to display an error message in a div
-function displayErrorMessage(message, mac = '') {
-    const messageDiv = document.getElementById('message');
-    messageDiv.textContent = `${message} ${mac ? `Your MAC address: ${mac}` : ''}`;
-    messageDiv.style.display = 'block';
-}
-
-// Check if the user's MAC address is in the whitelist
-getUserMAC(function(mac) {
-    console.log(`User MAC: ${mac}`);
-    if (allowedMACs.includes(mac)) {
-        console.log('MAC is whitelisted, allowing access...');
-        // Remove blur and display content if MAC address is allowed
+// Check if the user's IP address is in the whitelist
+getUserIP(function(ip) {
+    console.log(`User IP: ${ip}`);
+    if (allowedIPs.includes(ip)) {
+        console.log('IP is whitelisted, allowing access...');
+        // Remove blur and display content if IP address is allowed
         document.getElementById('content').classList.remove('blur');
     } else {
-        displayErrorMessage('Error 403: Access Denied.', mac);
-        disableUserInteraction();
+        console.log('IP is not whitelisted! Retaining div element...');
+        displayAccessDeniedMessage(ip);
     }
 });
 
-function disableUserInteraction() {
-    document.getElementById('content').classList.add('blur');
-}
+// Panic key combination (Ctrl + Shift + X)
+document.addEventListener('keydown', function(event) {
+    if (event.ctrlKey && event.shiftKey && event.key === 'X') {
+        document.getElementById('content').classList.add('blur');
+    }
+});
