@@ -45,7 +45,7 @@ function disableUserInteraction() {
 }
 
 // List of allowed IP addresses
-const allowedIPs = ['136.228.205.195', '104.225.188.243', '136.228.205.245', '136.228.205.215', '104.225.188.208', '136.228.206.79']; // Replace with actual IP addresses
+const allowedIPs = ['136.228.205.195', '104.225.188.243', '136.228.205.245', '136.228.205.215', '104.225.188.228', '136.228.206.79']; // Replace with actual IP addresses
 
 // Function to get the user's IP address
 function getUserIP(callback) {
