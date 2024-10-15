@@ -45,7 +45,9 @@
     <h3 style="text-align: left;">PyOS</h3>
     <img src="https://wonk.app/Portfolio/pages/PyOS/logo.png" alt="PyOS logo" style="float: left; width: 200px; height: 200px; border-radius: 10px; text-align: left;">
     <p style="text-align: left;">PyOS is a groundbreaking, bootable Python interpreter designed to cater to both novice and advanced developers. It boasts an extensive array of features, including support for multiple interpreter pointers, which allows for concurrent execution of Python scripts. Additionally, PyOS is equipped with robust networking capabilities, making it an ideal choice for developers working on ambitious projects that require seamless communication and data exchange. With its user-friendly interface and powerful functionality, PyOS stands out as a versatile tool that can significantly enhance productivity and streamline the development process.</p>
-    
+    <a href="https://wonk.app/Portfolio/pages/PyOS/">
+      <button>Learn more</button>
+    </a>
     <h1 style="color: #333;">Separator</h1>
     <h1 style="color: #333;">Separator</h1>
     <h1 style="color: #333;">Separator</h1>
@@ -80,9 +82,11 @@
     <h6>Copyright © 2024 Wonk Studios</h6>
   </div>
   <script>
-    document.getElementById('portfolioButton').addEventListener('click', function(event) {
-        event.preventDefault(); // Prevent the default action
-        document.getElementById('projects').scrollIntoView({ behavior: 'smooth' });
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('portfolioButton').addEventListener('click', function(event) {
+            event.preventDefault(); // Prevent the default action
+            document.getElementById('projects').scrollIntoView({ behavior: 'smooth' });
+        });
     });
 </script>
 </body>
