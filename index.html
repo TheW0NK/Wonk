@@ -17,7 +17,7 @@
       <button>Contact me!</button>
     </a>
     <a>
-      <button id="portfoliobutton">Portfolio</button>
+      <button id="portfolioButton">Portfolio</button>
     </a>
     <a href="https://wonk.app/index">
       <button>See Index</button>
@@ -83,12 +83,17 @@
   </div>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-        document.getElementById('portfolioButton').addEventListener('click', function(event) {
-            event.preventDefault(); // Prevent the default action
-            document.getElementById('projects').scrollIntoView({ behavior: 'smooth' });
-        });
+        const portfolioButton = document.getElementById('portfolioButton');
+        if (portfolioButton) {
+            portfolioButton.addEventListener('click', function(event) {
+                event.preventDefault(); // Prevent the default action
+                document.getElementById('projects').scrollIntoView({ behavior: 'smooth' });
+            });
+        } else {
+            console.error('Element with id "portfolioButton" not found.');
+        }
     });
-</script>
+  </script>
 </body>
 
 </html>
