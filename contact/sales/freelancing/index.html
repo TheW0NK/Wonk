@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Wonk</title>
+  <link rel="icon" href="https://wonk.app/wonklogo.png" type="wonklogo.png">
+  <link href="https://wonk.app/contact/styles.css" rel="stylesheet" type="text/css" />
+  <style>
+    body.blurred {
+      filter: blur(5px);
+    }
+    #terms-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.9);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+    #terms-overlay button {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+
+<body class="blurred">
+
+  <div id="terms-overlay">
+    <div>
+      <h2>Terms of Service</h2>
+      <p>At Wonk Studios we worked VERY hard to make a short and simple terms of service, so please read this carefully.</p>
+    <pre id="tos-content"></pre>
+    <script>
+      fetch('TOS.txt')
+        .then(response => response.text())
+        .then(text => {
+          document.getElementById('tos-content').textContent = text;
+        })
+        .catch(error => {
+          document.getElementById('tos-content').textContent = 'Failed to load Terms of Service. Please refresh or contact support for a copy.';
+        });
+    </script>
+      <button id="accept-terms">I have read the terms of service</button>
+    </div>
+  </div>
+
+  <h1>Wonk Studios freelancing</h1>
+
+  <a href="contractstarter.txt">
+    <button>Get a copy of the contract starter</button>
+  </a>
+
+  <script>
+    document.getElementById('accept-terms').addEventListener('click', function() {
+      document.getElementById('terms-overlay').style.display = 'none';
+      document.body.classList.remove('blurred');
+    });
+  </script>
+</body>
+
+</html>
