@@ -3,12 +3,24 @@ html {
     width: 100%;
     background-color: #333;
     color: #fff;
-    background-image: url('Screenshot 2024-10-15 085115.png');
-    background-size: cover;
-    filter: blur(10px);
     font-family: 'Arial', sans-serif;
     text-align: center;
-  }
+    position: relative;
+    overflow: hidden;
+}
+
+html::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('Screenshot 2024-10-15 085115.png');
+    background-size: cover;
+    filter: blur(5px);
+    z-index: -1;
+}
   
   button{
     background-color: #fff;
