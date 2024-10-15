@@ -1,32 +1,32 @@
 html {
-    height: 100%;
-    width: 100%;
-    background-color: #333;
-    color: #fff;
-    font-family: 'Arial', sans-serif;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
+  height: 100%;
+  width: 100%;
+  background-color: #333;
+  color: #fff;
+  font-family: 'Arial', sans-serif;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
 }
 
-html::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-image: url('Screenshot 2024-10-15 085115.png');
-    background-size: cover;
-    filter: blur(5px);
-    z-index: -1;
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('Screenshot 2024-10-15 085115.png');
+  background-size: cover;
+  filter: blur(5px);
+  z-index: -1;
 }
-  
-  button{
-    background-color: #fff;
-    color: #333;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-  }
+
+button {
+  background-color: #fff;
+  color: #333;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
