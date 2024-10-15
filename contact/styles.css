@@ -9,6 +9,11 @@ html {
   overflow: hidden;
 }
 
+body, button {
+  position: relative;
+  z-index: 1;
+}
+
 .background-container {
   position: fixed;
   top: 0;
