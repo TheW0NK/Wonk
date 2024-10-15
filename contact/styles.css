@@ -9,8 +9,7 @@ html {
   overflow: hidden;
 }
 
-body::before {
-  content: '';
+.background-blur {
   position: fixed;
   top: 0;
   left: 0;
@@ -20,6 +19,11 @@ body::before {
   background-size: cover;
   filter: blur(5px);
   z-index: -1;
+}
+
+body {
+  position: relative;
+  z-index: 1;
 }
 
 button {
