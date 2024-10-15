@@ -75,22 +75,16 @@
       <button>Get a copy of the contract starter</button>
     </a>
     
-    <form style="width: 250px; margin: 80px auto 0 auto;"></form>
-      <div>
-        <label for="client-name">Client's full legal name</label>
-        <input type="text" id="client-name" name="client-name" required>
-      </div>
-      <div>
-        <label for="project-name">Project name</label>
-        <input type="text" id="project-name" name="project-name" required>
-      </div>
-      <div>
-        <label for="project-description">Project Description</label>
-        <textarea id="project-description" name="project-description" rows="4" required></textarea>
-      </div>
-      <button type="submit">Submit</button>
+
+    <form action="mailto:aledeaux@gmail.com" method="post" enctype="text/plain">
+        <table>
+            <tr><td>Client's full legal name</td><td><input name="client_name"></td></tr>
+            <tr><td>Project Name</td><td><input name="project_name"></td></tr>
+            <tr><td>Project Description</td><td><textarea name="project_description"></textarea></td></tr>
+            <tr><td>Submit</td><td><button type="submit">Submit</button></td></tr>
+        </table>
     </form>
-  </div>
+     
 
   <script>
     document.getElementById('accept-terms').addEventListener('click', function() {
