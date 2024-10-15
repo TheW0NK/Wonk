@@ -13,6 +13,7 @@ html {
 body, button {
   position: relative;
   z-index: 1;
+  filter:blur(0px);
 }
 
 .background-container {
@@ -48,4 +49,9 @@ button {
   padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
+  filter:blur(0px);
+}
+
+h1 {
+  filter:blur(0px);
 }
