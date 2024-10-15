@@ -16,8 +16,8 @@
     <a href="https://wonk.app/contact/">
       <button>Contact me!</button>
     </a>
-    <a href="https://wonk.app/Portfolio/">
-      <button>Portfolio</button>
+    <a>
+      <button id="portfoliobutton">Portfolio</button>
     </a>
     <a href="https://wonk.app/index">
       <button>See Index</button>
@@ -31,7 +31,7 @@
   </div>
   <div style="margin-top: 150px;">
 
-    <h1>Our best projects</h1>
+    <h1 id="projects">Our best projects</h1>
     <h2>Wonk Studios is a premier software development company dedicated to delivering high-quality, innovative solutions to meet the diverse needs of our clients. Our team of experienced professionals specializes in a wide range of services, including custom software development, freelancing, and the creation of proprietary software products. As we continue to grow, we are excited to expand our offerings to include advanced services such as remote server management, cloud solutions, and comprehensive IT consulting. At Wonk Studios, we are committed to excellence, innovation, and client satisfaction, ensuring that we provide the best possible outcomes for every project we undertake.</h2>
     <a href="https://github.com/TheW0NK"><p style="text-align: left; color:blue;">Or see my github...</p></a>
     
@@ -79,7 +79,12 @@
     <h6 style="text-align: left;">Adrian Ray LeDeaux registered this domain name and DNS record on May 10.</h6>
     <h6>Copyright © 2024 Wonk Studios</h6>
   </div>
-  <script src="script.js"></script>
+  <script>
+    document.getElementById('portfolioButton').addEventListener('click', function(event) {
+        event.preventDefault(); // Prevent the default action
+        document.getElementById('projects').scrollIntoView({ behavior: 'smooth' });
+    });
+</script>
 </body>
 
 </html>
