@@ -1,0 +1,20 @@
+html {
+    height: 100%;
+    width: 100%;
+    background-color: #333;
+    color: #fff;
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+    background-image: url('bg1.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+  
+  button{
+    background-color: #fff;
+    color: #333;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
