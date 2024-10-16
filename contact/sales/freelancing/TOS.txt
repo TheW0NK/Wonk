@@ -1,7 +1,1 @@
-The terms of service boil down to this:
-
-1. We will not accept projects with any hateful or illegal intent
-2. You must clearly state your project and avoid scope creep
-3. You must follow what is in the contract.
-
-Failure to comply with the contract or TOS will result in the deletion of the repository with no refund and refusal of future requests.
+Loading...
