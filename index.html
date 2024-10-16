@@ -1,13 +1,75 @@
 <!DOCTYPE html>
 <html>
 
-
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
   <title>Wonk</title>
   <link rel="icon" href="wonklogo.png" type="wonklogo.png">
   <link href="style.css" rel="stylesheet" type="text/css" />
+  <style>
+    #main-content.blurred {
+      filter: blur(5px);
+    }
+    #terms-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      outline: 1px solid white;
+      border-width: 10px white;
+      border: 10px solid white;
+      box-sizing: border-box;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+    #terms-overlay .content-box {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 600px;
+      max-height: 80%;
+      overflow-y: auto;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+    #terms-overlay button {
+      margin-top: 20px;
+      display: block;
+      width: 100%;
+    }
+    form {
+      margin-top: 20px;
+    }
+    form div {
+      margin-bottom: 10px;
+    }
+    form label {
+      display: block;
+      margin-bottom: 5px;
+    }
+    form input, form textarea {
+      width: 100%;
+      padding: 8px;
+      box-sizing: border-box;
+    }
+    .banner-container {
+      height: 33.33vh; /* 33.33% of the viewport height */
+      overflow: hidden;
+      position: relative;
+    }
+    .banner-container img {
+      width: 100%;
+      height: auto;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  </style>
 </head>
 
 <body>
@@ -17,7 +79,7 @@
       <button>Contact us</button>
     </a>
     <a href="https://wonk.app/freelancing/">
-      <button>Freelancing soloutions</button>
+      <button>Freelancing solutions</button>
     </a>
     <a>
       <button id="portfolioButton">Portfolio</button>
@@ -34,7 +96,9 @@
   </div>
   <div style="margin-top: 150px;">
 
-    <img src="banner.png" alt="Banner" style="width: 50%;">
+    <div class="banner-container">
+      <img src="banner.png" alt="Banner">
+    </div>
 
     <h2>Wonk Studios is a premier software development company dedicated to delivering high-quality, innovative solutions to meet the diverse needs of our clients. Our team of experienced professionals specializes in a wide range of services, including custom software development, freelancing, and the creation of proprietary software products. As we continue to grow, we are excited to expand our offerings to include advanced services such as remote server management, cloud solutions, and comprehensive IT consulting. At Wonk Studios, we are committed to excellence, innovation, and client satisfaction, ensuring that we provide the best possible outcomes for every project we undertake, quality ensured.</h2>
     <a href="https://github.com/TheW0NK"><p style="text-align: left; color:blue;">Or see my github...</p></a>
@@ -43,7 +107,6 @@
     <h1 style="color: #333;">Separator</h1>
     <h1 style="color: #333;">Separator</h1>
     <h1 style="color: #333;">Separator</h1>
-
 
     <h1 id="projects">Our best projects</h1>
     <h3 style="text-align: left;">PyOS</h3>
@@ -71,7 +134,7 @@
     <p>A new game is in the works!</p>
     <p>______________________________________</p>
     <h3>📌 Courses!</h3>
-    <p>Free web lanquage courses incomming! Check back sometime in June, or July.</p>
+    <p>Free web language courses incoming! Check back sometime in June, or July.</p>
     <h5>Posted 5/5/2024</h5>
     <h6>This post is pinned. It will remain at the top of this section until unpinned or deleted.</h6>
     <h6>edited...</h6>
