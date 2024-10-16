@@ -5,6 +5,7 @@ html {
   color: #fff;
   font-family: 'Arial', sans-serif;
   text-align: center;
+  background-image: url('banner.png');
 }
 
 button{
@@ -14,4 +15,28 @@ button{
   padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
+}
+
+/* Add this to your existing style.css file */
+
+.content-wrapper {
+  background-color: #333;
+  padding: 20px;
+  border-radius: 10px;
+  color: white; /* Ensure text is readable on dark background */
+}
+
+.banner-container {
+  height: 33.33vh; /* 33.33% of the viewport height */
+  overflow: hidden;
+  position: relative;
+}
+
+.banner-container img {
+  width: 100%;
+  height: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
