@@ -8,6 +8,12 @@
   <link rel="icon" href="https://wonk.app/wonklogo.png" type="wonklogo.png">
   <link href="https://wonk.app/contact/styles.css" rel="stylesheet" type="text/css" />
   <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
     #main-content.blurred {
       filter: blur(5px);
     }
@@ -17,33 +23,42 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0);
-      outline: 1px solid rgba(255, 255, 255, 0);
-      border-width: 10px rgba(255, 255, 255, 0);
-      border: 10px solid rgba(255, 255, 255, 0);
-      box-sizing: border-box;
+      background: rgba(0, 0, 0, 0.8);
       display: flex;
       justify-content: center;
       align-items: center;
       z-index: 1000;
     }
     #terms-overlay .content-box {
-      background: rgb(0, 0, 0);
+      background: #fff;
       padding: 20px;
       border-radius: 10px;
       max-width: 600px;
       max-height: 80%;
       overflow-y: auto;
-      border: 10px solid white;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     }
     #terms-overlay button {
       margin-top: 20px;
       display: block;
       width: 100%;
+      padding: 10px;
+      background-color: #007BFF;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    #terms-overlay button:hover {
+      background-color: #0056b3;
     }
     form {
-      margin-top: 20px;
+      margin: 80px auto 0;
+      max-width: 600px;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
     form div {
       margin-bottom: 10px;
@@ -56,21 +71,37 @@
       width: 100%;
       padding: 8px;
       box-sizing: border-box;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    form button {
+      width: 100%;
+      padding: 10px;
+      background-color: #007BFF;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    form button:hover {
+      background-color: #0056b3;
     }
   </style>
 </head>
 
 <body>
 
-  <div id="terms-overlay">
+  <div id="terms-overlay" role="dialog" aria-labelledby="terms-title" aria-describedby="terms-content">
     <div class="content-box">
-      <h2>Terms of Service</h2>
-      <p>We at Wonk Studios worked very hard to make a simple and short TOS, so please read it.</p>
-      <p>The terms of service boil down to this:</p>
-      <p>1. We will not accept projects with any hateful, harmful, or illegal intent</p>
-      <p>2. You must clearly state your project and avoid scope creep</p>
-      <p>3. You must follow what is in the contract.</p>
-      <p>Failure to comply with the contract or TOS will result in the deletion of the repository with no refund and refusal of future requests.</p>
+      <h2 id="terms-title">Terms of Service</h2>
+      <div id="terms-content">
+        <p>We at Wonk Studios worked very hard to make a simple and short TOS, so please read it.</p>
+        <p>The terms of service boil down to this:</p>
+        <p>1. We will not accept projects with any hateful, harmful, or illegal intent</p>
+        <p>2. You must clearly state your project and avoid scope creep</p>
+        <p>3. You must follow what is in the contract.</p>
+        <p>Failure to comply with the contract or TOS will result in the deletion of the repository with no refund and refusal of future requests.</p>
+      </div>
       <button id="accept-terms">I have read the terms of service</button>
     </div>
   </div>
@@ -80,17 +111,27 @@
     <a href="contractstarter.txt">
       <button>Get a copy of the contract starter</button>
     </a>
-    
 
-    <form action="mailto:aledeaux@gmail.com" method="post" enctype="text/plain" style="margin: 80px auto 0; max-width: 600px;"></form>
-        <table style="width: 600px; margin: 80px auto 0;">
-            <tr><td>Client's full legal name</td><td><input name="client_name" style="width: 100%;"></td></tr>
-            <tr><td>Client date of birth</td><td><input name="client_dob" style="width: 100%;"</td></tr>
-            <tr><td>Project Name</td><td><input name="project_name" style="width: 100%;"></td></tr>
-            <tr><td>Project Description</td><td><textarea name="project_description" style="width: 100%;"></textarea></td></tr>
-            <tr><td></td><td><button type="submit" style="width: 100%;">Submit</button></td></tr>
-        </table>
+    <form action="mailto:aledeaux@gmail.com" method="post" enctype="text/plain">
+      <div>
+        <label for="client_name">Client's full legal name</label>
+        <input id="client_name" name="client_name" required>
+      </div>
+      <div>
+        <label for="client_dob">Client date of birth</label>
+        <input id="client_dob" name="client_dob" type="date" required>
+      </div>
+      <div>
+        <label for="project_name">Project Name</label>
+        <input id="project_name" name="project_name" required>
+      </div>
+      <div>
+        <label for="project_description">Project Description</label>
+        <textarea id="project_description" name="project_description" rows="4" required></textarea>
+      </div>
+      <button type="submit">Submit</button>
     </form>
+  </div>
 
   <script>
     document.getElementById('accept-terms').addEventListener('click', function() {
@@ -98,14 +139,13 @@
       document.getElementById('main-content').classList.remove('blurred');
     });
 
-    // Assuming you have a function to fetch the terms of service
     fetch('https://wonk.app/contact/sales/freelancing/TOS.txt')
       .then(response => response.text())
       .then(text => {
-        document.getElementById('tos-content').textContent = text;
+        document.getElementById('terms-content').innerHTML = text;
       })
       .catch(error => {
-        document.getElementById('tos-content').textContent = 'Failed to load Terms of Service. Please refresh or contact support for a copy.';
+        document.getElementById('terms-content').textContent = 'Failed to load Terms of Service. Please refresh or contact support for a copy.';
       });
   </script>
 </body>
