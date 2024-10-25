@@ -11,7 +11,7 @@ function displayLoginForm() {
             <input type="password" id="password" name="password" required><br>
             <button type="submit">Login</button>
         </form>
-        <p id="loginError" style="color: red; display: none;">Invalid username or password. Please try again.</p>
+        <p id="loginError" style="color: red; display: none;">Invalid username or password. Please try again or contact the site admin (aledeaux@gmail.com) for assistance.</p>
     `;
     document.body.appendChild(loginDiv);
     console.log('Login form displayed');
