@@ -16,6 +16,7 @@ function displayLoginForm() {
     document.body.appendChild(loginDiv);
     console.log('Login form displayed');
     disableInspectTool();
+    disableScrolling();
 
     document.getElementById('loginForm').addEventListener('submit', function(event) {
         event.preventDefault();
@@ -37,6 +38,7 @@ function validateLogin(username, password) {
         console.log('Login successful, allowing access...');
         document.getElementById('content').classList.remove('blur');
         document.querySelector('.center-message').remove();
+        enableScrolling();
     } else {
         console.log('Invalid login attempt');
         document.getElementById('loginError').style.display = 'block';
@@ -60,22 +62,14 @@ function disableInspectTool() {
     });
 }
 
-// Function to disable user interaction (clicking and scrolling)
-function disableUserInteraction() {
-    // Disable scrolling
+// Function to disable scrolling
+function disableScrolling() {
     document.body.style.overflow = 'hidden';
+}
 
-    // Disable clicking
-    document.body.style.pointerEvents = 'none';
-
-    // Prevent default actions for mouse and touch events
-    document.addEventListener('mousedown', function(event) {
-        event.preventDefault();
-    }, true);
-
-    document.addEventListener('touchstart', function(event) {
-        event.preventDefault();
-    }, true);
+// Function to enable scrolling
+function enableScrolling() {
+    document.body.style.overflow = 'auto';
 }
 
 // Display the login form on page load
