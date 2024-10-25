@@ -27,7 +27,7 @@ function displayLoginForm() {
 }
 
 // Function to validate login credentials
-function validateLogin(username, password) { //reset to this
+function validateLogin(username, password) {
     const validCredentials = [
         { username: 'aledeaux', password: '1M&&b==307' },
         { username: 'RSNOW', password: 'R_snow12?'     },
@@ -41,6 +41,7 @@ function validateLogin(username, password) { //reset to this
         document.getElementById('content').classList.remove('blur');
         document.querySelector('.center-message').remove();
         enableScrolling();
+        startTracking();
     } else {
         console.log('Invalid login attempt');
         document.getElementById('loginError').style.display = 'block';
@@ -72,6 +73,49 @@ function disableScrolling() {
 // Function to enable scrolling
 function enableScrolling() {
     document.body.style.overflow = 'auto';
+}
+
+// Function to start tracking for suspicious programs
+function startTracking() {
+    setInterval(checkForSuspiciousPrograms, 30000); // Check every 30 seconds
+}
+
+// Function to check for suspicious programs
+function checkForSuspiciousPrograms() {
+    const { exec } = require('child_process');
+    exec('ps aux', (error, stdout, stderr) => {
+        if (error) {
+            console.error(`Error executing ps: ${error.message}`);
+            return;
+        }
+        if (stderr) {
+            console.error(`Error in ps output: ${stderr}`);
+            return;
+        }
+
+        const processes = stdout.split('\n');
+        const suspiciousPrograms = ['lanschool', 'remote'];
+        const detectedPrograms = processes.filter(process => 
+            suspiciousPrograms.some(program => process.includes(program))
+        );
+
+        if (detectedPrograms.length > 0) {
+            displaySecurityBreach(detectedPrograms.join(', '));
+        }
+    });
+}
+
+// Function to display security breach message
+function displaySecurityBreach(program) {
+    const breachDiv = document.createElement('div');
+    breachDiv.className = 'center-message';
+    breachDiv.style.color = 'red';
+    breachDiv.innerHTML = `
+        <h1>482: Security breach</h1>
+        <p>A suspicious program was detected that could potentially breach the security of this website.</p>
+        <p>Suspicious program listed: ${program}</p>
+    `;
+    document.body.appendChild(breachDiv);
 }
 
 // Display the login form on page load
