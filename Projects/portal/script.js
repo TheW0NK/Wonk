@@ -27,7 +27,7 @@ function displayLoginForm() {
 }
 
 // Function to validate login credentials
-function validateLogin(username, password) {
+function validateLogin(username, password) { //reset to this
     const validCredentials = [
         { username: 'aledeaux', password: '1M&&b==307' },
         { username: 'RSNOW', password: 'R_snow12?'     },
