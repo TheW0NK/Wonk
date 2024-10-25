@@ -1,14 +1,48 @@
-// Function to display the access denied message
-function displayAccessDeniedMessage(ip) {
-    const messageDiv = document.createElement('div');
-    messageDiv.className = 'center-message';
-    messageDiv.innerHTML = `<h1>Error 403: Forbidden</h1><p>Your IP address is ${ip}. Please contact the site administrator (aledeaux@gmail.com) to get whitelisted.</p>`;
-    document.body.appendChild(messageDiv);
-    console.log('Access denied message displayed');
+// Function to display the login form
+function displayLoginForm() {
+    const loginDiv = document.createElement('div');
+    loginDiv.className = 'center-message';
+    loginDiv.innerHTML = `
+        <h1>Login Required</h1>
+        <form id="loginForm">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required><br>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required><br>
+            <button type="submit">Login</button>
+        </form>
+        <p id="loginError" style="color: red; display: none;">Invalid username or password. Please try again.</p>
+    `;
+    document.body.appendChild(loginDiv);
+    console.log('Login form displayed');
     disableInspectTool();
-    disableUserInteraction();
+
+    document.getElementById('loginForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+        validateLogin(username, password);
+    });
 }
-//PEEN
+
+// Function to validate login credentials
+function validateLogin(username, password) {
+    const validCredentials = [
+        { username: 'aledeaux', password: '1M&&b==307' },
+    ];
+
+    const isValid = validCredentials.some(account => account.username === username && account.password === password);
+
+    if (isValid) {
+        console.log('Login successful, allowing access...');
+        document.getElementById('content').classList.remove('blur');
+        document.querySelector('.center-message').remove();
+    } else {
+        console.log('Invalid login attempt');
+        document.getElementById('loginError').style.display = 'block';
+    }
+}
+
 // Function to disable the inspect tool
 function disableInspectTool() {
     // Disable right-click context menu
@@ -44,32 +78,9 @@ function disableUserInteraction() {
     }, true);
 }
 
-// List of allowed IP addresses
-const allowedIPs = ['136.228.205.195', '104.225.188.243', '136.228.205.245', '136.228.205.215', '104.225.188.228', '136.228.206.79']; // Replace with actual IP addresses
-
-// Function to get the user's IP address
-function getUserIP(callback) {
-    fetch('https://api.ipify.org?format=json')
-        .then(response => response.json())
-        .then(data => callback(data.ip))
-        .catch(error => {
-            console.error('Error fetching IP address:', error);
-            alert('Unable to verify IP address. Access denied.');
-            disableUserInteraction();
-        });
-}
-
-// Check if the user's IP address is in the whitelist
-getUserIP(function(ip) {
-    console.log(`User IP: ${ip}`);
-    if (allowedIPs.includes(ip)) {
-        console.log('IP is whitelisted, allowing access...');
-        // Remove blur and display content if IP address is allowed
-        document.getElementById('content').classList.remove('blur');
-    } else {
-        console.log('IP is not whitelisted! Retaining div element...');
-        displayAccessDeniedMessage(ip);
-    }
+// Display the login form on page load
+document.addEventListener('DOMContentLoaded', function() {
+    displayLoginForm();
 });
 
 // Panic key combination (Ctrl + Shift + X)
