@@ -31,6 +31,7 @@ function validateLogin(username, password) { //reset to this
     const validCredentials = [
         { username: 'aledeaux', password: '1M&&b==307' },
         { username: 'RSNOW', password: 'R_snow12?'     },
+        { username: 'OB', password: 'N!co2020'         },
     ];
 
     const isValid = validCredentials.some(account => account.username === username && account.password === password);
