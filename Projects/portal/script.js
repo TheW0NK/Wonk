@@ -108,8 +108,26 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // Panic key combination (Ctrl + Shift + X)
+function displayuserblock() {
+    const loginDiv = document.createElement('div');
+    loginDiv.className = 'center-message';
+    loginDiv.innerHTML = `
+    <h1>483: Page locked by user</h1>
+    <p>You have locked the page with the panic key. Please login to unlock the page.</p>
+    <button id="unlockButton">Unlock</button>
+    `;
+    document.body.appendChild(panicDiv);
+}
+
+document.getElementById('unlockButton').addEventListener('click', function() {
+    location.reload();
+}
+
 document.addEventListener('keydown', function(event) {
     if (event.ctrlKey && event.shiftKey && event.key === 'X') {
         document.getElementById('content').classList.add('blur');
+        disableInspectTool()
+        disableScrolling();
+        displayuserblock();
     }
 });
