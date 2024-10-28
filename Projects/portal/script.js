@@ -11,7 +11,7 @@ function displayLoginForm() {
             <input type="password" id="password" name="password" required><br>
             <button type="submit">Login</button>
         </form>
-        <p id="loginError" style="color: red; display: none;">Invalid username or password. Please try again or contact the site admin (aledeaux@gmail.com) for assistance.</p>
+        <p id="loginError" style="color: red; display: none;">Invalid username or password. Please try again or contact the site admin for assistance.</p>
     `;
     document.body.appendChild(loginDiv);
     console.log('Login form displayed');
@@ -27,24 +27,28 @@ function displayLoginForm() {
 }
 
 // Function to validate login credentials
-function validateLogin(username, password) {
-    const validCredentials = [
-        { username: 'aledeaux', password: '1M&&b==307' },
-        { username: 'RSNOW', password: 'R_snow12?'     },
-        { username: 'OB', password: 'N!co2020'         },
-    ];
+async function validateLogin(username, password) {
+    try {
+        const response = await fetch('/api/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ username, password })
+        });
 
-    const isValid = validCredentials.some(account => account.username === username && account.password === password);
-
-    if (isValid) {
-        console.log('Login successful, allowing access...');
-        document.getElementById('content').classList.remove('blur');
-        document.querySelector('.center-message').remove();
-        enableScrolling();
-        startTracking();
-    } else {
-        console.log('Invalid login attempt');
-        document.getElementById('loginError').style.display = 'block';
+        if (response.ok) {
+            console.log('Login successful, allowing access...');
+            document.getElementById('content').classList.remove('blur');
+            document.querySelector('.center-message').remove();
+            enableScrolling();
+            startTracking();
+        } else {
+            console.log('Invalid login attempt');
+            document.getElementById('loginError').style.display = 'block';
+        }
+    } catch (error) {
+        console.error('Error during login:', error);
     }
 }
 
@@ -77,32 +81,12 @@ function enableScrolling() {
 
 // Function to start tracking for suspicious programs
 function startTracking() {
-    setInterval(checkForSuspiciousPrograms, 30000); // Check every 30 seconds
+    setInterval(checkForSuspiciousPrograms, 10000); // Check every 30 seconds
 }
 
 // Function to check for suspicious programs
 function checkForSuspiciousPrograms() {
-    const { exec } = require('child_process');
-    exec('ps aux', (error, stdout, stderr) => {
-        if (error) {
-            console.error(`Error executing ps: ${error.message}`);
-            return;
-        }
-        if (stderr) {
-            console.error(`Error in ps output: ${stderr}`);
-            return;
-        }
-
-        const processes = stdout.split('\n');
-        const suspiciousPrograms = ['lanschool', 'remote'];
-        const detectedPrograms = processes.filter(process => 
-            suspiciousPrograms.some(program => process.includes(program))
-        );
-
-        if (detectedPrograms.length > 0) {
-            displaySecurityBreach(detectedPrograms.join(', '));
-        }
-    });
+    // This function should be implemented on the server-side
 }
 
 // Function to display security breach message
