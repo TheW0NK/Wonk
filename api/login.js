@@ -13,6 +13,7 @@ const validCredentials = [
     { username: 'aledeaux', password: process.env.ALEDEAUX_PASSWORD },
     { username: 'RSNOW', password: process.env.RSNOW_PASSWORD },
     { username: 'OB', password: process.env.OB_PASSWORD },
+    { username: 'LANGSTON', password: process.env.LANGSTON_PASSWORD },
 ];
 
 app.post('/api/login', (req, res) => {
