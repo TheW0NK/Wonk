@@ -1,34 +1,115 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const dotenv = require('dotenv');
+// Function to display the login form
+function displayLoginForm() {
+    const loginDiv = document.createElement('div');
+    loginDiv.className = 'center-message';
+    loginDiv.innerHTML = `
+        <h1>Login Required</h1>
+        <form id="loginForm">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required><br>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required><br>
+            <button type="submit">Login</button>
+        </form>
+        <p id="loginError" style="color: red; display: none;">Invalid username or password. Please try again or contact the site admin for assistance.</p>
+    `;
+    document.body.appendChild(loginDiv);
+    console.log('Login form displayed');
+    disableInspectTool();
+    disableScrolling();
 
-dotenv.config();
+    document.getElementById('loginForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+        validateLogin(username, password);
+    });
+}
 
-const app = express();
-const PORT = process.env.PORT || 3000;
+// Function to validate login credentials
+async function validateLogin(username, password) {
+    try {
+        const response = await fetch('/api/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ username, password })
+        });
 
-app.use(bodyParser.json());
-
-const validCredentials = [
-    { username: 'aledeaux', password: process.env.ALEDEAUX_PASSWORD },
-    { username: 'RSNOW', password: process.env.RSNOW_PASSWORD },
-    { username: 'OB', password: process.env.OB_PASSWORD },
-];
-
-app.post('/api/login', (req, res) => {
-    const { username, password } = req.body;
-    console.log(`Login attempt: username=${username}, password=${password}`);
-    const isValid = validCredentials.some(account => account.username === username && account.password === password);
-
-    if (isValid) {
-        console.log('Login successful');
-        res.status(200).send('Login successful');
-    } else {
-        console.log('Invalid credentials');
-        res.status(401).send('Invalid credentials');
+        if (response.ok) {
+            console.log('Login successful, allowing access...');
+            document.getElementById('content').classList.remove('blur');
+            document.querySelector('.center-message').remove();
+            enableScrolling();
+            startTracking();
+        } else {
+            console.log('Invalid login attempt');
+            document.getElementById('loginError').style.display = 'block';
+        }
+    } catch (error) {
+        console.error('Error during login:', error);
     }
+}
+
+// Function to disable the inspect tool
+function disableInspectTool() {
+    // Disable right-click context menu
+    document.addEventListener('contextmenu', function(event) {
+        event.preventDefault();
+    });
+
+    // Disable F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'F12' || 
+            (event.ctrlKey && event.shiftKey && (event.key === 'I' || event.key === 'J')) || 
+            (event.ctrlKey && event.key === 'U')) {
+            event.preventDefault();
+        }
+    });
+}
+
+// Function to disable scrolling
+function disableScrolling() {
+    document.body.style.overflow = 'hidden';
+}
+
+// Function to enable scrolling
+function enableScrolling() {
+    document.body.style.overflow = 'auto';
+}
+
+// Function to start tracking for suspicious programs
+function startTracking() {
+    setInterval(checkForSuspiciousPrograms, 10000); // Check every 30 seconds
+}
+
+// Function to check for suspicious programs
+function checkForSuspiciousPrograms() {
+    // This function should be implemented on the server-side
+}
+
+// Function to display security breach message
+function displaySecurityBreach(program) {
+    const breachDiv = document.createElement('div');
+    breachDiv.className = 'center-message';
+    breachDiv.style.color = 'red';
+    breachDiv.innerHTML = `
+        <h1>482: Security breach</h1>
+        <p>A suspicious program was detected that could potentially breach the security of this website.</p>
+        <p>Suspicious program listed: ${program}</p>
+    `;
+    document.body.appendChild(breachDiv);
+}
+
+// Display the login form on page load
+document.addEventListener('DOMContentLoaded', function() {
+    displayLoginForm();
 });
 
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+// Panic key combination (Ctrl + Shift + X)
+document.addEventListener('keydown', function(event) {
+    if (event.ctrlKey && event.shiftKey && event.key === 'X') {
+        document.getElementById('content').classList.add('blur');
+    }
 });
