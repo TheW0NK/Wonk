@@ -121,7 +121,7 @@ function displayuserblock() {
 
 document.getElementById('unlockButton').addEventListener('click', function() {
     location.reload();
-}
+});
 
 document.addEventListener('keydown', function(event) {
     if (event.ctrlKey && event.shiftKey && event.key === 'X') {
