@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html style="
+    height: 100%;
+    width: 100%;
+    background-color: #333;
+    color: #fff;
+    font-family: 'Arial', sans-serif;
+    text-align: center;">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>400</title>
+  <link rel="icon" href="https://wonk.app/Resources/wonk404.png" type="wonklogo.png">
+  <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+    <h1>400</h1>
+    <h3>Bad request.</h3>
+    <p>As a gift, have a button to the homepage!</p>
+    <a href="https://wonk.app/">
+        <button style="background-color: #fff;
+        color: #333;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;">Home</button>
+    </a>
+    <br><br>
+    <button onclick="showDetails()" style="background-color: #fff;
+    color: #333;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;">Show Technical Details</button>
+    <div id="details" style="display:none; margin-top: 20px;">
+        <p id="error-code"></p>
+        <p id="error-message"></p>
+    </div>
+
+    <script>
+        function showDetails() {
+            // Simulate fetching technical details
+            const errorCode = '400';
+            const errorMessage = 'Bad request. The server could not understand the request due to invalid syntax.';
+
+            document.getElementById('error-code').innerText = 'Error Code: ' + errorCode;
+            document.getElementById('error-message').innerText = 'Message: ' + errorMessage;
+            document.getElementById('details').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
