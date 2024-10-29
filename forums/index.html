@@ -1,75 +1,51 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width">
-  <title>Wonk</title>
-  <link rel="icon" href="wonklogo.png" type="wonklogo.png">
-  <link href="style.css" rel="stylesheet" type="text/css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Discussions</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .discussion {
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin: 10px 0;
+        }
+        .discussion-title {
+            font-weight: bold;
+        }
+    </style>
 </head>
-
 <body>
-  <h1 style="text-align: center;">Wonk Projects</h1>
-  <a href="https://wonk.app/Portfolio/">
-    <button>Portfolio</button>
-  </a>
-  <a href="https://wonk.app/index">
-    <button>See Index</button>
-  </a>
-  <a>
-    <button id="forumButton">Forums</button>
-  </a>
-  <a>
-    <button>Submit an idea</button>
-  </a>
+    <h1>GitHub Discussions</h1>
+    <div id="discussions"></div>
 
-  <div id="forumSection" style="display:none;">
-    <h2>Forums</h2>
-    <form id="forumForm">
-      <label for="message">Your Message:</label>
-      <input type="text" id="message" name="message" required>
-      <button type="submit">Post</button>
-    </form>
-    <h2>Messages</h2>
-    <ul id="messageList"></ul>
-  </div>
+    <script>
+        async function fetchDiscussions() {
+            const response = await fetch('https://api.github.com/orgs/Wonk-studios/discussions');
+            const discussions = await response.json();
+            const discussionsContainer = document.getElementById('discussions');
 
-  <h2>Submit Your Idea</h2>
-  <form id="ideaForm">
-    <label for="idea">Your Idea:</label>
-    <input type="text" id="idea" name="idea" required>
-    <button type="submit">Submit</button>
-  </form>
-  <h2>Submitted Ideas</h2>
-  <ul id="ideaList"></ul>
+            discussions.forEach(discussion => {
+                const discussionElement = document.createElement('div');
+                discussionElement.className = 'discussion';
 
-  <script>
-    document.getElementById('forumButton').addEventListener('click', function() {
-      const forumSection = document.getElementById('forumSection');
-      forumSection.style.display = forumSection.style.display === 'none' ? 'block' : 'none';
-    });
+                const titleElement = document.createElement('div');
+                titleElement.className = 'discussion-title';
+                titleElement.textContent = discussion.title;
 
-    document.getElementById('forumForm').addEventListener('submit', function(event) {
-      event.preventDefault();
-      const message = document.getElementById('message').value;
-      const messageList = document.getElementById('messageList');
-      const listItem = document.createElement('li');
-      listItem.textContent = message;
-      messageList.appendChild(listItem);
-      document.getElementById('forumForm').reset();
-    });
+                const bodyElement = document.createElement('div');
+                bodyElement.textContent = discussion.body;
 
-    document.getElementById('ideaForm').addEventListener('submit', function(event) {
-      event.preventDefault();
-      const idea = document.getElementById('idea').value;
-      const ideaList = document.getElementById('ideaList');
-      const listItem = document.createElement('li');
-      listItem.textContent = idea;
-      ideaList.appendChild(listItem);
-      document.getElementById('ideaForm').reset();
-    });
-  </script>
+                discussionElement.appendChild(titleElement);
+                discussionElement.appendChild(bodyElement);
+                discussionsContainer.appendChild(discussionElement);
+            });
+        }
+
+        fetchDiscussions();
+    </script>
 </body>
-
 </html>
