@@ -112,8 +112,8 @@ function displayuserblock() {
     const panicDiv = document.createElement('div');
     panicDiv.className = 'center-message';
     panicDiv.innerHTML = `
-    <h1>483: Page locked by user</h1>
-    <p>You have locked the page with the panic key. Please login to unlock the page.</p>
+    <h1>483: Page secured by user</h1>
+    <p>The end user secured the page. Please login to unlock the page.</p>
     <button id="unlockButton">Unlock</button>
     `;
     document.body.appendChild(panicDiv);
